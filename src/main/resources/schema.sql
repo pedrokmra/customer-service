@@ -1,7 +1,6 @@
 create table customers (
-    id bigint not null,
+    id bigint auto_increment primary key,
     email varchar(255) not null,
     name varchar(255) not null,
-    password varchar(255) not null,
-    primary key (id)
+    password varchar(255) not null
 );
