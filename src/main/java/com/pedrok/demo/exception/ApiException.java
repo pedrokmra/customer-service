@@ -4,9 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.http.HttpStatus;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 public class ApiException {
-    private final String message;
+    private final List<String> message;
 
     @JsonIgnore
     private final Throwable throwable;
@@ -15,14 +16,14 @@ public class ApiException {
 
     private final ZonedDateTime zonedDateTime;
 
-    public ApiException(String message, Throwable throwable, HttpStatus httpStatus, ZonedDateTime zonedDateTime) {
+    public ApiException(List<String> message, Throwable throwable, HttpStatus httpStatus, ZonedDateTime zonedDateTime) {
         this.message = message;
         this.throwable = throwable;
         this.httpStatus = httpStatus;
         this.zonedDateTime = zonedDateTime;
     }
 
-    public String getMessage() {
+    public List<String> getMessage() {
         return message;
     }
 
@@ -41,7 +42,7 @@ public class ApiException {
     @Override
     public String toString() {
         return "ApiException{" +
-                "message='" + message + '\'' +
+                "message=" + message +
                 ", throwable=" + throwable +
                 ", httpStatus=" + httpStatus +
                 ", zonedDateTime=" + zonedDateTime +

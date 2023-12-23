@@ -12,6 +12,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.ZonedDateTime;
+import java.util.Collections;
+import java.util.List;
 
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
@@ -23,12 +25,11 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
             WebRequest request
     ) {
 
-        String error = exception.getBindingResult()
+        List<String> error = exception.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                .toList()
-                .toString();
+                .toList();
 
         ApiException apiException = new ApiException(
                 error,
@@ -46,7 +47,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Object> handleNotFoundException(NotFoundException exception) {
         ApiException apiException = new ApiException(
-                exception.getMessage(),
+                Collections.singletonList(exception.getMessage()),
                 exception,
                 HttpStatus.NOT_FOUND,
                 ZonedDateTime.now()
