@@ -7,6 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("v1/customer")
+@Deprecated
 public class CustomerController {
     private final CustomerService customerService;
 
