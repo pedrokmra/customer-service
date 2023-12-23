@@ -1,6 +1,7 @@
 package com.pedrok.demo.customer;
 
 import com.pedrok.demo.exception.NotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +23,10 @@ public class CustomerService {
     public Customer getCustomer(Long id) {
         return customerRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("customer with ID " + id + " not found"));
+    }
+
+    @Transactional
+    public Customer createCustomer(Customer customer) {
+        return customerRepository.save(customer);
     }
 }

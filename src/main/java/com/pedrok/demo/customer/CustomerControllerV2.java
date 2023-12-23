@@ -28,8 +28,7 @@ public class CustomerControllerV2 {
 
     @PostMapping
     public Customer createCustomer(@Valid @RequestBody Customer customer) {
-        System.out.println("POST: " + customer);
-        return customer;
+        return customerService.createCustomer(customer);
     }
 
     @PutMapping
