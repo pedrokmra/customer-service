@@ -17,7 +17,7 @@ public class Customer {
     private final String password;
 
     @NotNull(message = "email must not be empty")
-    @Email
+    @Email(message = "email must be well-formatted")
     private final String email;
 
     public Customer(Long id, String name, String password, String email) {
