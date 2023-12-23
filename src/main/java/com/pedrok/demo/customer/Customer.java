@@ -1,11 +1,16 @@
 package com.pedrok.demo.customer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotBlank;
 
 public class Customer {
     @JsonProperty("customer_id")
     private final Long id;
+
+    @NotBlank
     private final String name;
+
+    @NotBlank
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private final String password;
 

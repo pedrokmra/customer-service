@@ -1,5 +1,6 @@
 package com.pedrok.demo.customer;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,13 +27,13 @@ public class CustomerControllerV2 {
     }
 
     @PostMapping
-    public Customer createCustomer(@RequestBody Customer customer) {
+    public Customer createCustomer(@Valid @RequestBody Customer customer) {
         System.out.println("POST: " + customer);
         return customer;
     }
 
     @PutMapping
-    public Customer updateCustomer(@RequestBody Customer customer) {
+    public Customer updateCustomer(@Valid @RequestBody Customer customer) {
         System.out.println("PUT: " + customer);
         return customer;
     }
