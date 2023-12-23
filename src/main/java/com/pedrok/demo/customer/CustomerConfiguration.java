@@ -13,8 +13,6 @@ public class CustomerConfiguration {
     public CustomerRepositoryInterface customerRepositoryInterface() {
         System.out.println("useCustomerFakeRepository = " + useCustomerFakeRepository);
 
-        return useCustomerFakeRepository ?
-                new CustomerFakeRepository() :
-                new CustomerRepository();
+        return new CustomerFakeRepository();
     }
 }

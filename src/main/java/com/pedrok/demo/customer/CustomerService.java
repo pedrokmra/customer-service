@@ -8,20 +8,19 @@ import java.util.List;
 
 @Service
 public class CustomerService {
-    private final CustomerRepositoryInterface customerRepository;
+    private final CustomerRepository customerRepository;
 
     @Autowired
-    public CustomerService(CustomerRepositoryInterface customerRepository) {
+    public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
     public List<Customer> getCustomers() {
-        return customerRepository.getCustomers();
+        return customerRepository.findAll();
     }
 
     public Customer getCustomer(Long id) {
-        return customerRepository.getCustomers().stream()
-                .filter(customer -> customer.getId().equals(id))
-                .findFirst().orElseThrow(() -> new NotFoundException("customer with ID " + id + " not found"));
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("customer with ID " + id + " not found"));
     }
 }

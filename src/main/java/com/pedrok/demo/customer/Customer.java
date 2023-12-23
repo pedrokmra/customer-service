@@ -1,30 +1,38 @@
 package com.pedrok.demo.customer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+@Entity
+@Table(name = "customers")
 public class Customer {
-    @JsonProperty("customer_id")
-    private final Long id;
+    @Id
+    private Long id;
 
     @NotBlank(message = "name must not be empty")
-    private final String name;
+    private String name;
 
     @NotBlank(message = "password must not be empty")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private final String password;
+    private String password;
 
     @NotNull(message = "email must not be empty")
     @Email(message = "email must be well-formatted")
-    private final String email;
+    private String email;
 
     public Customer(Long id, String name, String password, String email) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.email = email;
+    }
+
+    public Customer() {
     }
 
     public Long getId() {
