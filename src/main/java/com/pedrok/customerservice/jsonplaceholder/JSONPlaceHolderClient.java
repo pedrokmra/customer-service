@@ -1,4 +1,4 @@
-package com.pedrok.demo.jsonplaceholder;
+package com.pedrok.customerservice.jsonplaceholder;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

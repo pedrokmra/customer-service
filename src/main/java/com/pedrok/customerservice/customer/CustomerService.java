@@ -1,6 +1,6 @@
-package com.pedrok.demo.customer;
+package com.pedrok.customerservice.customer;
 
-import com.pedrok.demo.exception.NotFoundException;
+import com.pedrok.customerservice.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

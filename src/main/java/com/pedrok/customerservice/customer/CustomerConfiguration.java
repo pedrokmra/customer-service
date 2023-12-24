@@ -1,4 +1,4 @@
-package com.pedrok.demo.customer;
+package com.pedrok.customerservice.customer;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

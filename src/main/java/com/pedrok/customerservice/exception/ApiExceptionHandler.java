@@ -1,4 +1,4 @@
-package com.pedrok.demo.exception;
+package com.pedrok.customerservice.exception;
 
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;

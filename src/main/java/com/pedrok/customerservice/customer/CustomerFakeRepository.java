@@ -1,4 +1,4 @@
-package com.pedrok.demo.customer;
+package com.pedrok.customerservice.customer;
 
 import java.util.Arrays;
 import java.util.List;

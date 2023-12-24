@@ -1,4 +1,4 @@
-package com.pedrok.demo.exception;
+package com.pedrok.customerservice.exception;
 
 public class RequestException extends RuntimeException {
     public RequestException(String message) {

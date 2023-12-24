@@ -1,4 +1,4 @@
-package com.pedrok.demo.infoapp;
+package com.pedrok.customerservice.infoapp;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,4 +1,4 @@
-package com.pedrok.demo.exception;
+package com.pedrok.customerservice.exception;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.http.HttpStatus;

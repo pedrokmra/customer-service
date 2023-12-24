@@ -1,4 +1,4 @@
-package com.pedrok.demo.customer;
+package com.pedrok.customerservice.customer;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

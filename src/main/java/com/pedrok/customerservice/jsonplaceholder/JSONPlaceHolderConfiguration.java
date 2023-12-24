@@ -1,4 +1,4 @@
-package com.pedrok.demo.jsonplaceholder;
+package com.pedrok.customerservice.jsonplaceholder;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;

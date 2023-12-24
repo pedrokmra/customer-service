@@ -1,4 +1,4 @@
-package com.pedrok.demo.exception;
+package com.pedrok.customerservice.exception;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {

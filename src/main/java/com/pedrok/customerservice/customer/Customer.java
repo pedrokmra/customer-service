@@ -1,4 +1,4 @@
-package com.pedrok.demo.customer;
+package com.pedrok.customerservice.customer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;

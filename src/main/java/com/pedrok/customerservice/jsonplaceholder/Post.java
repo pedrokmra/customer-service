@@ -1,4 +1,4 @@
-package com.pedrok.demo.jsonplaceholder;
+package com.pedrok.customerservice.jsonplaceholder;
 
 public class Post {
     private final Long userId;
