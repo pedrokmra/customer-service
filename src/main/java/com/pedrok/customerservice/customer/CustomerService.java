@@ -2,22 +2,17 @@ package com.pedrok.customerservice.customer;
 
 import com.pedrok.customerservice.exception.NotFoundException;
 import jakarta.transaction.Transactional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
+@Slf4j
 public class CustomerService {
-    private final static Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
     private final CustomerRepository customerRepository;
-
-    @Autowired
-    public CustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
 
     public List<Customer> getCustomers() {
         return customerRepository.findAll();
@@ -27,7 +22,7 @@ public class CustomerService {
         return customerRepository.findById(id)
                 .orElseThrow(() -> {
                     NotFoundException notFoundException = new NotFoundException("customer with ID " + id + " not found");
-                    LOGGER.error("customer with ID {} not found", id, notFoundException);
+                    log.error("customer with ID {} not found", id, notFoundException);
                     return notFoundException;
                 });
     }
@@ -35,7 +30,7 @@ public class CustomerService {
     @Transactional
     public Customer createCustomer(Customer customer) {
         Customer customerCreated = customerRepository.save(customer);
-        LOGGER.info("{} created", customerCreated);
+        log.info("{} created", customerCreated);
         return customerCreated;
     }
 }
