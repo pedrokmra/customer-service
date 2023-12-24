@@ -12,3 +12,9 @@ spring:
   h2:
     console:
       enabled: true
+
+info:
+  app:
+    name: customer-service
+    description: spring boot application
+    version: 1.0.0
