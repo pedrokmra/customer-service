@@ -16,8 +16,6 @@ public class InfoApp {
 
     @Bean
     CommandLineRunner runner(InfoApp infoApp) {
-        return args -> {
-            System.out.println(infoApp);
-        };
+        return args -> System.out.println(infoApp);
     }
 }
