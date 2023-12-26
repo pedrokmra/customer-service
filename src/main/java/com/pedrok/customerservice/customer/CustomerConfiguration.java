@@ -11,7 +11,7 @@ public class CustomerConfiguration {
 
     @Bean
     public CustomerRepositoryInterface customerRepositoryInterface() {
-        System.out.println("useCustomerFakeRepository = " + useCustomerFakeRepository);
+        // System.out.println("useCustomerFakeRepository = " + useCustomerFakeRepository);
 
         return new CustomerFakeRepository();
     }
