@@ -15,8 +15,13 @@ public class InfoApp {
     private String description;
     private String version;
 
+    @Value("${app.showInfoApp:false}")
+    private boolean showInfoApp;
+
     @Bean
     CommandLineRunner runner(InfoApp infoApp) {
-        return args -> System.out.println(infoApp);
+        return args -> {
+            if (showInfoApp) System.out.println(infoApp);
+        };
     }
 }
