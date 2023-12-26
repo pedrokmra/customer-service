@@ -20,6 +20,7 @@ public class Customer {
     private Long id;
 
     @NotBlank(message = "name must not be empty")
+    @Column(nullable = false)
     private String name;
 
     @NotBlank(message = "password must not be empty")
@@ -28,5 +29,6 @@ public class Customer {
 
     @NotNull(message = "email must not be empty")
     @Email(message = "email must be well-formatted")
+    @Column(nullable = false, unique = true)
     private String email;
 }

@@ -4,6 +4,7 @@ import com.pedrok.customerservice.exception.NotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,8 +30,13 @@ public class CustomerService {
 
     @Transactional
     public Customer createCustomer(Customer customer) {
-        Customer customerCreated = customerRepository.save(customer);
-        log.info("{} created", customerCreated);
-        return customerCreated;
+        try {
+            Customer customerCreated = customerRepository.save(customer);
+            log.info("{} created", customerCreated);
+            return customerCreated;
+        } catch (DataIntegrityViolationException exception) {
+            log.error("email {} already exists: {}", customer.getEmail(), exception.getMessage());
+            throw new DataIntegrityViolationException("email "+ customer.getEmail() + " already exists");
+        }
     }
 }

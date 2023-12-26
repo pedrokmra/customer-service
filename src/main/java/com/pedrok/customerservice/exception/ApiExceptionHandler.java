@@ -1,6 +1,7 @@
 package com.pedrok.customerservice.exception;
 
 import org.springframework.context.support.DefaultMessageSourceResolvable;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -56,6 +57,21 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(
                 apiException,
                 HttpStatus.NOT_FOUND
+        );
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException exception) {
+        ApiException apiException = new ApiException(
+                Collections.singletonList(exception.getMessage()),
+                exception,
+                HttpStatus.CONFLICT,
+                ZonedDateTime.now()
+        );
+
+        return new ResponseEntity<>(
+                apiException,
+                HttpStatus.CONFLICT
         );
     }
 }
