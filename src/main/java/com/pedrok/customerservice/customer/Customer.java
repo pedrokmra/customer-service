@@ -30,4 +30,8 @@ public class Customer {
     @Email(message = "email must be well-formatted")
     @Column(nullable = false, unique = true)
     private String email;
+
+    @NotBlank(message = "phoneNumber must not be empty")
+    @Column(nullable = false, unique = true)
+    private String phoneNumber;
 }
