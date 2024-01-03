@@ -37,7 +37,7 @@ class CustomerRepositoryTest {
     }
 
     @Test
-    void itShouldNotSelectCustomerByPhoneNumber() {
+    void itShouldNotSelectCustomerByPhoneNumberWhenNumberNotExists() {
         // GIVEN
         String phoneNumber = "5199221919";
 
