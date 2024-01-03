@@ -3,7 +3,6 @@ package com.pedrok.customerservice.customer;
 import com.pedrok.customerservice.exception.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.shadow.com.univocity.parsers.common.DataValidationException;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
