@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -13,14 +15,16 @@ public class PaymentService {
     private final CustomerService customerService;
     private final CardPaymentCharger cardPaymentCharger;
 
+    // TODO load from properties file
+    private static final List<Currency> ACCEPTED_CURRENCIES = List.of(Currency.USD, Currency.EUR);
+
     public void chargeCard(Long customerId, Payment payment) {
         customerService.getCustomer(customerId);
 
-        try {
-            Currency.valueOf(String.valueOf(payment.getCurrency()));
-        } catch (IllegalArgumentException exception) {
+        boolean isCurrencySupported = ACCEPTED_CURRENCIES.contains(payment.getCurrency());
+        if (!isCurrencySupported) {
             log.error("currency " + payment.getCurrency() + " is not supported");
-            throw exception;
+            throw new IllegalStateException("currency " + payment.getCurrency() + " is not supported");
         }
 
         CardPaymentCharge cardPaymentCharge = cardPaymentCharger.chargeCard(
