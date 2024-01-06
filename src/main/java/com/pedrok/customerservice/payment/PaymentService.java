@@ -1,6 +1,7 @@
 package com.pedrok.customerservice.payment;
 
 import com.pedrok.customerservice.customer.CustomerService;
+import com.pedrok.customerservice.exception.NotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -43,5 +44,14 @@ public class PaymentService {
         paymentRepository.save(payment);
 
         // TODO: SEND SMS
+    }
+
+    public Payment getPayment(Long id) {
+        return paymentRepository.findById(id)
+                .orElseThrow(() -> {
+                    NotFoundException notFoundException = new NotFoundException("payment with ID " + id + "not found");
+                    log.error("payment with ID " + id + "not found");
+                    return notFoundException;
+                });
     }
 }
