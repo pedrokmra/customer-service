@@ -20,18 +20,23 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotNull(message = "customerId must not be empty")
     @Column(nullable = false)
     private Long customerId;
+
     @NotNull(message = "amount must not be null")
     @Positive(message = "amount must be positive")
     @Column(nullable = false)
     private BigDecimal amount;
-    @NotBlank(message = "currency must not be empty")
+
+    @NotNull(message = "currency must not be empty")
     @Column(nullable = false)
     private Currency currency;
+
     @NotBlank(message = "source must not be empty")
     @Column(nullable = false)
     private String source;
+
     private String description;
 }
