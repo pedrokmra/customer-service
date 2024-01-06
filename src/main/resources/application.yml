@@ -18,3 +18,6 @@ info:
     name: customer-service
     description: spring boot application
     version: 1.0.0
+
+stripe:
+  enabled: false
