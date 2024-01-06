@@ -2,6 +2,8 @@ package com.pedrok.customerservice.customer;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +25,8 @@ public class CustomerControllerV2 {
     }
 
     @PostMapping
-    public Customer createCustomer(@Valid @RequestBody Customer customer) {
-        return customerService.createCustomer(customer);
+    public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomer(customer));
     }
 
     @PutMapping
