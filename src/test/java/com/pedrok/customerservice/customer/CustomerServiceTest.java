@@ -1,6 +1,7 @@
 package com.pedrok.customerservice.customer;
 
 import com.pedrok.customerservice.exception.NotFoundException;
+import com.pedrok.customerservice.utils.PhoneNumberValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -24,6 +25,8 @@ import static org.mockito.BDDMockito.then;
 class CustomerServiceTest {
     @Mock
     private CustomerRepository customerRepository;
+    @Mock
+    private PhoneNumberValidator phoneNumberValidator;
     @InjectMocks
     private CustomerService customerService;
     @Captor
@@ -91,15 +94,17 @@ class CustomerServiceTest {
     @Test
     void itShouldCreateCustomer() {
         // GIVEN
+        String phoneNumber = "0000";
+
         Customer customer = Customer.builder()
                 .name("test")
                 .password("123")
                 .email("email@email.com")
-                .phoneNumber("0000").build();
-
-        when(customerRepository.save(customer)).thenReturn(customer);
+                .phoneNumber(phoneNumber).build();
 
         // WHEN
+        when(customerRepository.save(customer)).thenReturn(customer);
+        when(phoneNumberValidator.validate(phoneNumber)).thenReturn(true);
         customerService.createCustomer(customer);
 
         // THEN
@@ -111,16 +116,37 @@ class CustomerServiceTest {
     }
 
     @Test
-    void itShouldThrowWhenEmailAlreadyExists() {
+    void itShouldThrowWhenPhoneNumberIsInvalid() {
         // GIVEN
+        String phoneNumber = "0000";
+
         Customer customer = Customer.builder()
                 .name("test")
                 .password("123")
                 .email("email@email.com")
-                .phoneNumber("0000").build();
+                .phoneNumber(phoneNumber).build();
+
+        // WHEN
+        when(phoneNumberValidator.validate(phoneNumber)).thenReturn(false);
+
+        // THEN
+        assertThrows(IllegalStateException.class, () -> customerService.createCustomer(customer));
+        verify(customerRepository, times(0)).save(customer);
+    }
+
+    @Test
+    void itShouldThrowWhenEmailAlreadyExists() {
+        // GIVEN
+        String phoneNumber = "000";
+        Customer customer = Customer.builder()
+                .name("test")
+                .password("123")
+                .email("email@email.com")
+                .phoneNumber(phoneNumber).build();
 
         when(customerRepository.save(customer))
                 .thenThrow(new DataIntegrityViolationException("DataIntegrityViolationException"));
+        when(phoneNumberValidator.validate(phoneNumber)).thenReturn(true);
 
         // WHEN
         // THEN
@@ -131,16 +157,19 @@ class CustomerServiceTest {
     @Test
     void itShouldThrowWhenPhoneNumberAlreadyExists() {
         // GIVEN
+        String phoneNumber = "0000";
         Customer customer = Customer.builder()
                 .name("test")
                 .password("123")
                 .email("email@email.com")
-                .phoneNumber("0000").build();
+                .phoneNumber(phoneNumber).build();
 
         when(customerRepository.save(customer))
                 .thenThrow(new DataIntegrityViolationException("DataIntegrityViolationException"));
 
         // WHEN
+        when(phoneNumberValidator.validate(phoneNumber)).thenReturn(true);
+
         // THEN
         assertThrows(DataIntegrityViolationException.class, () -> customerService.createCustomer(customer));
         verify(customerRepository, times(1)).save(customer);
