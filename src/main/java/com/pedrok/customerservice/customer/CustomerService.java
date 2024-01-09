@@ -1,6 +1,7 @@
 package com.pedrok.customerservice.customer;
 
 import com.pedrok.customerservice.exception.NotFoundException;
+import com.pedrok.customerservice.utils.PhoneNumberValidator;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,8 @@ import java.util.List;
 @Slf4j
 public class CustomerService {
     private final CustomerRepository customerRepository;
+    private final PhoneNumberValidator phoneNumberValidator;
+
     private static final String DB_UK_EMAIL_ERROR =
             "PUBLIC.CONSTRAINT_INDEX_6 ON PUBLIC.CUSTOMERS(EMAIL NULLS FIRST)";
     private static final String DB_UK_PHONE_NUMBER_ERROR =
@@ -34,6 +37,11 @@ public class CustomerService {
     @Transactional
     public Customer createCustomer(Customer customer) {
         try {
+            if (!phoneNumberValidator.validate(customer.getPhoneNumber())) {
+                log.error("phone number " + customer.getPhoneNumber() + " is not valid");
+                throw new IllegalStateException("phone number " + customer.getPhoneNumber() + " is not valid");
+            }
+
             Customer customerCreated = customerRepository.save(customer);
             log.info("{} created", customerCreated);
             return customerCreated;
