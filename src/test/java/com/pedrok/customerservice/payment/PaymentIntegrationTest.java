@@ -38,7 +38,7 @@ public class PaymentIntegrationTest {
         customer.put("name", "test1");
         customer.put("password", "12345");
         customer.put("email", "test1@test.com");
-        customer.put("phoneNumber", "00000");
+        customer.put("phoneNumber", "5551992817676");
 
         ResultActions createCustomerResultActions = mockMvc.perform(post("/v2/customer")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -112,8 +112,6 @@ public class PaymentIntegrationTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.httpStatus").value(HttpStatus.NOT_FOUND.name()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.zonedDateTime").isNotEmpty());
     }
-
-    // TODO validate FIELDS
 
     @Test
     void itShouldThrowWhenAmountIsNegative() throws Exception {
