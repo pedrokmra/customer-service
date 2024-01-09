@@ -74,4 +74,19 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 HttpStatus.CONFLICT
         );
     }
+
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<Object> handleIllegalStateException(IllegalStateException exception) {
+        ApiException apiException = new ApiException(
+                Collections.singletonList(exception.getMessage()),
+                exception,
+                HttpStatus.BAD_REQUEST,
+                ZonedDateTime.now()
+        );
+
+        return new ResponseEntity<>(
+                apiException,
+                HttpStatus.BAD_REQUEST
+        );
+    }
 }
