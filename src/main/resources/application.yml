@@ -21,3 +21,6 @@ info:
 
 stripe:
   enabled: false
+
+twilio:
+  enabled: false
