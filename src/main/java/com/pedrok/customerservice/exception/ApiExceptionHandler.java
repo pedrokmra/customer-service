@@ -60,6 +60,21 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         );
     }
 
+    @ExceptionHandler(NotSentException.class)
+    public ResponseEntity<Object> handleNotSentException(NotSentException exception) {
+        ApiException apiException = new ApiException(
+                Collections.singletonList(exception.getMessage()),
+                exception,
+                HttpStatus.BAD_GATEWAY,
+                ZonedDateTime.now()
+        );
+
+        return new ResponseEntity<>(
+                apiException,
+                HttpStatus.BAD_GATEWAY
+        );
+    }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException exception) {
         ApiException apiException = new ApiException(
