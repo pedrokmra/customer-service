@@ -80,8 +80,6 @@ public class PaymentIntegrationTest {
         getPaymentResultActions.andExpect(status().isOk());
         getPaymentResultActions
                 .andExpect(MockMvcResultMatchers.content().json(objectMapper.writeValueAsString(payment)));
-
-        // TODO: Ensure sms is delivered
     }
 
     @Test
