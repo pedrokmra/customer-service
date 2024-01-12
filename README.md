@@ -3,9 +3,6 @@
 ## Overview
 This project implements a CRUD system for managing customer data and is built on the Spring Web MVC architecture.
 
-## New Features
-* Unit and Integration tests
-
 ## Dependencies
 * [Spring Web](https://docs.spring.io/spring-boot/docs/3.2.1/reference/htmlsingle/index.html#web): creates HTTP server and controller to handle requests.
 
